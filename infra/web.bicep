@@ -53,13 +53,14 @@ module app 'core/host/container-app-upsert.bicep' = {
         secretRef: 'secret-key'
       }
       ]
-    secrets: [
-        {
-          name: 'secret-key'
-          keyVaultUrl: '${keyVault.properties.vaultUri}secrets/SECRETKEY'
-          identity: webIdentity.id
-        }
-      ]
+    secrets: {
+     }
+    keyvaultIdentities: {
+      'secret-key': {
+        keyVaultUrl: '${keyVault.properties.vaultUri}secrets/SECRETKEY'
+        identity: webIdentity.id
+      }
+    }
     postgresServiceId: postgresServiceId
     targetPort: 8000
   }
